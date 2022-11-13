@@ -46,7 +46,7 @@ public func ==(lhs: WikipediaArticlePreview, rhs: WikipediaArticlePreview) -> Bo
     return lhs.title == rhs.title && lhs.language == rhs.language
 }
 
-public final class WikipediaArticlePreview: Hashable, Equatable {
+public class WikipediaArticlePreview: Hashable, Equatable {
     
     public var language: WikipediaLanguage
     
