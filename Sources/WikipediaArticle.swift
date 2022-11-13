@@ -35,6 +35,8 @@ public class WikipediaArticle {
    
     public var title: String
     public var displayTitle: String
+
+    public var description: String
     
     public var rawText = ""
     public lazy var displayText: String = {
@@ -66,7 +68,7 @@ public class WikipediaArticle {
         return editURL
     }()
     
-    public init(language: WikipediaLanguage, title: String, displayTitle: String) {
+    public init(language: WikipediaLanguage, title: String, displayTitle: String, description: String) {
         self.language = language
         self.title = title.replacingOccurrences(of: "_", with: " ")
         
@@ -78,6 +80,7 @@ public class WikipediaArticle {
                                                                    language: language,
                                                                    isHTML: true)) ?? formattedTitle
         self.displayTitle = formattedTitle
+        self.description = description
     }
     
     public var areOtherLanguagesAvailable = false
@@ -136,8 +139,10 @@ extension WikipediaArticle {
         let title = lead["normalizedtitle"] as? String ?? title
 
         let rawDisplayTitle = (lead["displaytitle"] as? String) ?? title
+
+        let description = lead["description"] as? String ?? ""
         
-        self.init(language: language, title: title, displayTitle: rawDisplayTitle)
+        self.init(language: language, title: title, displayTitle: rawDisplayTitle, description: description)
 
         self.scrollToFragment = fragment
         self.rawText = text
